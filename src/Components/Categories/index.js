@@ -18,20 +18,20 @@ function Categories(props) {
   }
 
   return (
-    <>
-      <Typography lineHeight={3} ml='10px' component='h3'>
+    <div>
+      <Typography lineHeight={3} ml='10px' component='h3' variant='h5'>
         Browse our Categories
       </Typography>
       <div style={catStyle}>
         {
           categories.map((category, idx) => {
             return (
-              <Category key={`category-${idx}`} category={category} handleClick={handleClick}/>
+              <Category key={`category-${idx}`} category={category} handleClick={handleClick} />
             )
           })
         }
       </div>
-    </>
+    </div>
   )
 }
 
