@@ -1,7 +1,9 @@
 import { Typography, Grid } from '@mui/material';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Product from '../Product';
 import {addToCart} from '../store/cart/cart';
+import { getProducts } from '../store/products/products';
+import {useEffect} from 'react';
 
 
 let headerStyle = {
@@ -26,7 +28,15 @@ const gridItemStyle = {
 }
 
 function Products(props) {
-  const { products, header, addToCart } = props;
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+    // eslint-disable-next-line 
+  }, []);
+
+  const { filteredProducts, header, addToCart } = props;
 
   const handleClick = (product) => {
     addToCart(product);
@@ -39,7 +49,7 @@ function Products(props) {
       </Typography>
       <Grid container style={gridStyle}>
         {
-          products.map((product, idx) => {
+          filteredProducts.map((product, idx) => {
             return (
               <Grid key={`product-${idx}`} style={gridItemStyle}>
                 <Product product={product} handleClick={handleClick}/>
@@ -52,8 +62,8 @@ function Products(props) {
   )
 }
 
-const mapStateToProps = ({ products }) => {
-  return products;
+const mapStateToProps = ({products}) => {
+  return {filteredProducts: products.filteredProducts};
 };
 
 const mapDispatchToProps = {addToCart};

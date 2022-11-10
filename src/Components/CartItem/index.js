@@ -20,7 +20,7 @@ function CartItem(props) {
 
   return (
     <div style={cartStyle}>
-      <Typography variant='h6'>{item.product}</Typography>
+      <Typography variant='h6'>{item.product.name}</Typography>
       <CancelIcon sx={{ color: red[900] }} fontSize='small' onClick={() => handleClick(item)} style={deleteStyle}></CancelIcon>
     </div>
   )

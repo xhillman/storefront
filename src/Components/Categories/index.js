@@ -1,11 +1,19 @@
 import { Typography } from '@mui/material';
-import { connect } from 'react-redux'
-import { selectCategory } from '../store/categories/categories';
+import { connect, useDispatch } from 'react-redux'
+import { selectCategory, getCategories } from '../store/categories/categories';
 import Category from '../Category';
+import { useEffect } from 'react';
 
 function Categories(props) {
 
   const { categories, selectCategory } = props;
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line 
+  }, []);
 
   let catStyle = {
     display: 'flex',
@@ -14,7 +22,8 @@ function Categories(props) {
   }
 
   const handleClick = (category) => {
-    selectCategory(category);
+    console.log('Category clicked', category);
+    selectCategory(category.name);
   }
 
   return (
